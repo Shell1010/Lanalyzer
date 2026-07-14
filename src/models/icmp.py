@@ -365,7 +365,7 @@ class ICMP:
         header_bytes = data[:8]
         
         # Check build_icmp_header, same concept but reverse
-        # Effectively pulling 
+        # Pulling data from the bytes
         type, code, _, identifier, sequence = struct.unpack("!2B3H", header_bytes)
 
         # Extract the data part (everything after the header)
