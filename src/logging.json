@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+      "basic": {
+        "format": "%(asctime)s | %(name)-15s | %(levelname)-8s | %(message)s",
+        "datefmt": "%Y-%m-%d %H:%M:%S"
+      }
+    },
+    "handlers": {
+      "stdout": {
+        "class": "logging.StreamHandler",
+        "formatter": "basic",
+        "stream": "ext://sys.stdout",
+        "level": "INFO"
+      }, 
+      "files": {
+        "class": "logging.handlers.RotatingFileHandler",
+        "formatter": "basic",
+        "filename": "network_mapper.log",
+        "encoding": "utf-8",
+        "level": "DEBUG"
+      }
+    },
+    "loggers": {
+      "root": {
+        "level": "DEBUG",
+        "handlers": [
+          "stdout",
+          "files"
+        ]
+      },
+      "__main__": {
+        "level": "DEBUG",
+        "handlers": [
+          "stdout",
+          "files"
+        ]
+      }
+    }
+  }

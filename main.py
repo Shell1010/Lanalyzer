@@ -1,31 +1,27 @@
-# NOT ACTUAL CODE, I JUST WANTED TO SEE THE BITWISE STUFF WORKING
+"""
+Main script and configuration file.
+"""
+import json
+import logging.config
+from pathlib import Path
 
-# Same value: 0x12345
-# Binary: 1 0010 0011 0100 0101 
-val = 0x12345
+Path("network_mapper.log")
+logger = logging.getLogger(__name__)
 
-# Shift right by 16 bits
-# Deletes the bottom 16 bits and leaves only what was above them.
-overflow_carry = val >> 16
+def setup_logging():
+    with open("src/logging.json") as config_file:
+        config = json.load(config_file)
 
-print(f"Original: {hex(val)}")       # 0x12345
-print(f"Overflow Carry: {hex(overflow_carry)}") # 0x1 (Only the overflow remains
+    logging.config.dictConfig(config)
 
 
-# Masking with 0xFFFF (16 ones)
-# This keeps the bottom 16 bits and turns the rest to 0.
-preserved_bottom = val & 0xFFFF       # 0x12345
-print(f"Preserved Bottom: {hex(preserved_bottom)}") # 0x2345 (The '1' is gone)
+class App:
+    def __init__(self):
+        setup_logging()
 
-# Example: Adding two large 16-bit numbers that cause an overflow
+    def run(self):
+        # Idk we're probably gonna first call the network scanning module here and thats about it...
+        pass
 
-# Step: Wrap the carry (the 1 at the top) around to the bottom
-# (total_sum & 0xFFFF) extracts the bottom 16 bits (0x0000)
-# (total_sum >> 16) extracts the overflow carry (0x0001)
-total_sum = (val & 0xFFFF) + (val >> 16)
-
-print(f"Final 16-bit Sum: {hex(total_sum)}") # 0x0001
-
-# 0010 0011 0100 0101
-# 0000 0000 0000 0001
-# 
+if __name__ == "__main__":
+    App().run()

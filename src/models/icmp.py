@@ -5,13 +5,13 @@ for a full explanation. Codes and additional types have been obtained from IANA 
 https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml#icmp-parameters-codes-0.
 """
 from __future__ import annotations
+
 import enum
+import logging
 import struct
-from ..logging import get_logger
 from typing import Union, Dict, Type
 
-logging = get_logger(__name__)
-
+logger = logging.getLogger(__name__)
 
 class ICMPType(enum.IntEnum):
     """ICMP types as defined in RFC 792. Specified near the bottom."""
@@ -26,7 +26,7 @@ class ICMPType(enum.IntEnum):
 
     # According to IANA it's deprecated
     ALTERNATE_HOST_ADDRESS = 6
-
+    
     ECHO_REQUEST = 8
     ROUTER_ADVERTISEMENT = 9
     ROUTER_SELECTION = 10
